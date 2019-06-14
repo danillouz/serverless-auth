@@ -1,0 +1,18 @@
+{
+  "name": "lambda-authorizers",
+  "version": "1.0.0",
+  "description": "APIG Lambda Authorizers.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "serverless deploy --stage prod"
+  },
+  "author": "Daniël Illouz <daniel.illouz@me.com> (https://www.danillouz.dev/)",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.5.1"
+  },
+  "devDependencies": {
+    "serverless": "^1.45.1"
+  }
+}

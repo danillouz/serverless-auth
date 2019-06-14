@@ -1,6 +1,6 @@
 # Serverless Auth
 
-Code for the accompanying <a href="https://blog.danillouz.dev/serverless-auth" target="_blank" rel="noopener noreferrer">blog post</a>.
+Code for the accompanying [blog post](https://blog.danillouz.dev/serverless-auth).
 
 # Development
 
