@@ -1,0 +1,14 @@
+{
+  "name": "account-api",
+  "version": "1.0.0",
+  "description": "Account API that returns a user profile.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "serverless deploy --stage prod"
+  },
+  "author": "Daniël Illouz <daniel.illouz@me.com> (https://www.danillouz.dev/)",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless": "^1.45.1"
+  }
+}
