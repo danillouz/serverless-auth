@@ -2,6 +2,7 @@ service: account-api
 
 custom:
   authorizer:
+    # Add your own AWS account ID
     arn: arn:aws:lambda:eu-central-1:ACCOUNT_ID:function:lambda-authorizers-prod-auth0VerifyBearer
     resultTtlInSeconds: 0
     identitySource: method.request.header.Authorization

@@ -8,8 +8,11 @@ provider:
   memorySize: 128
   timeout: 3
   environment:
-    JWKS_URI: 'https://danillouz.eu.auth0.com/.well-known/jwks.json'
-    TOKEN_ISSUER: 'https://danillouz.eu.auth0.com/'
+    # Add your own Auth0 tenant name
+    JWKS_URI: 'https://TENANT_NAME.eu.auth0.com/.well-known/jwks.json'
+    TOKEN_ISSUER: 'https://TENANT_NAME.eu.auth0.com/'
+
+    # Add your own audience (Auth0 API identifier)
     AUDIENCE: 'https://api.danillouz.dev/account'
 
 package:
