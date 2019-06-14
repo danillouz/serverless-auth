@@ -1,12 +1,18 @@
 'use strict';
 
+const util = require('util');
+
+const jwt = require('jsonwebtoken');
 const jwksRSA = require('jwks-rsa');
+
 const getToken = require('./get-token');
 const verifyToken = require('./verify-token');
 
 const { JWKS_URI, TOKEN_ISSUER, AUDIENCE } = process.env;
 
 const jwksClient = jwksRSA({ cache: true, rateLimit: true, jwksUri: JWKS_URI });
+const getSigningKey = util.promisify(jwksClient.getSigningKey);
+const verifyJwt = util.promisify(jwt.verify);
 
 /**
  * AWS API Gateway Lambda Authorizer that uses Auth0 as the third party auth provider.
@@ -24,8 +30,10 @@ module.exports.verifyBearer = async event => {
   try {
     const token = getToken(event);
     const verifiedData = await verifyToken(
-      jwksClient,
       token,
+      jwt.decode,
+      getSigningKey,
+      verifyJwt,
       TOKEN_ISSUER,
       AUDIENCE
     );
