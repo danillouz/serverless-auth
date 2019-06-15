@@ -10,8 +10,11 @@ const verifyToken = require('./verify-token');
 
 const { JWKS_URI, TOKEN_ISSUER, AUDIENCE } = process.env;
 
+// See: https://github.com/auth0/node-jwks-rsa#usage
 const jwksClient = jwksRSA({ cache: true, rateLimit: true, jwksUri: JWKS_URI });
 const getSigningKey = util.promisify(jwksClient.getSigningKey);
+
+// See: https://github.com/auth0/node-jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
 const verifyJwt = util.promisify(jwt.verify);
 
 /**
@@ -22,7 +25,7 @@ const verifyJwt = util.promisify(jwt.verify);
  *  2. Fetch the JWKS from Auth0 and verify the token signature, issuer and audience claims.
  *  3. Return an IAM Policy document with "Effect" set to "Allow" when the token has been verified.
  *
- * @param {Object} event - HTTP input
+ * @param {Object} event - HTTP input: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
  *
  * @return {Promise} Resolves with an AWS IAM Policy document
  */
@@ -50,12 +53,14 @@ module.exports.verifyBearer = async event => {
             Resource: event.methodArn
           }
         ]
-      },
+      }
 
       // NOTE!
       // You can NOT set a JSON object or array as a valid value of any key in the context object
       // It must be either a String, Number or Boolean
-      context: { scope: verifiedData.scope }
+      // context: {
+      //   scope: verifiedData.scope // When scope is configured with Auth0
+      // }
     };
     return authResponse;
   } catch (err) {

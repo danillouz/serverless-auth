@@ -4,7 +4,7 @@
   "description": "Code for the accompanying blog post.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint lambda-authorizers account-api",
+    "lint": "eslint lambda-authorizers/src account-api/src",
     "lint:format": "npm run lint -- --fix"
   },
   "repository": {

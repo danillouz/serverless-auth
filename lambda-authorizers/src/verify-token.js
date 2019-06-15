@@ -21,6 +21,8 @@ module.exports = async function verifyToken(
   issuer,
   audience
 ) {
+  // "complete" set to "true" returns the decoded payload and header
+  // See: https://github.com/auth0/node-jsonwebtoken#jwtdecodetoken--options
   const decoded = decodeJwt(token, { complete: true });
 
   if (!decoded || !decoded.header || !decoded.header.kid) {
