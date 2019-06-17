@@ -53,14 +53,14 @@ module.exports.verifyBearer = async event => {
             Resource: event.methodArn
           }
         ]
-      }
+      },
 
       // NOTE!
       // You can NOT set a JSON object or array as a valid value of any key in the context object
       // It must be either a String, Number or Boolean
-      // context: {
-      //   scope: verifiedData.scope // When scope is configured with Auth0
-      // }
+      context: {
+        scope: verifiedData.scope
+      }
     };
     return authResponse;
   } catch (err) {
