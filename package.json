@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Code for the accompanying blog post.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint lambda-authorizers/src account-api/src",
     "lint:format": "npm run lint -- --fix"
   },
