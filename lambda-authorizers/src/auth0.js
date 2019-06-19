@@ -21,13 +21,13 @@ const verifyJwt = util.promisify(jwt.verify);
  * AWS API Gateway Lambda Authorizer that uses Auth0 as the third party auth provider.
  *
  * This Lambda will:
- *  1. Extract the bearer token from the "Authorization" request header.
+ *  1. Extract the bearer token from the Authorization request header.
  *  2. Fetch the JWKS from Auth0 and verify the token signature, issuer and audience claims.
  *  3. Return an IAM Policy document with "Effect" set to "Allow" when the token has been verified.
  *
  * @param {Object} event - HTTP input: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
  *
- * @return {Promise} Resolves with an AWS IAM Policy document
+ * @return {Promise} Resolves with an "auth response" (Principal ID, IAM Policy and Context)
  */
 module.exports.verifyBearer = async event => {
   try {
@@ -41,9 +41,8 @@ module.exports.verifyBearer = async event => {
       AUDIENCE
     );
 
-    const userId = verifiedData.sub;
     const authResponse = {
-      principalId: userId,
+      principalId: verifiedData.sub,
       policyDocument: {
         Version: '2012-10-17',
         Statement: [

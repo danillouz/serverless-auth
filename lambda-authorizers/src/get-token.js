@@ -3,12 +3,12 @@
 /**
  * Extracts the bearer token from the Authorization request header.
  *
- * The value of the request header MUST have the format "Bearer TOKEN".
- * Note that "Bearer" must be capitalized!
+ * The value of the request header MUST have the format: "Bearer TOKEN".
+ * Note that "Bearer" MUST be capitalized!
  *
  * @param {Object} event - AWS APIG HTTP input
  *
- * @return {String} token
+ * @return {String} Token
  */
 module.exports = function getToken(event) {
   if (event.type !== 'TOKEN') {
